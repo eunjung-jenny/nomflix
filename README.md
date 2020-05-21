@@ -27,8 +27,6 @@ npx -v
 - [] Search
 - [] Detail
 
-
-
 ## 앱 기본 설정
 
 - `create-react-app` : 리액트는 최신 javascript 문법을 사용, 이로 인해 `babel`, `webpack` 등을 사용하여 브라우저가 해석할 수 있게끔 downgrade 작업을 해줘야 하는 부분을 자동화해줌.
@@ -40,5 +38,28 @@ npx -v
 npx create-react-app [앱 이름]
 npm add prop-types
 npm start
+```
+
+## 리액트 활용
+
+- Router Composition
+
+```react
+<Router>
+  <Route path="/tv" component={TV} />
+  <Route path="/tv/popular" render={() => <h1>Popular</h1>}/>
+</Router>
+```
+
+- Switch & Redirect
+
+```react
+<Router>
+  <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/tv" component={TV} />
+    <Redirect from="*" to="/" />
+  </Switch>
+</Router>
 ```
 
