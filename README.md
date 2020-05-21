@@ -137,6 +137,11 @@ const Item = styled.li`
 <Item current="true" />
 ```
 
+### 컨테이너-프리젠터 패턴
+
+- 컨테이너: 데이터를 불러오는 역할 (w/ api, state, logics)
+- 프리젠터: 화면에 보여주는 역할 (함수형 컴포넌트)
+
 ## 해야할 것
 
 - 서버 만들어서 api key 숨기기 (키 변경 필요)
