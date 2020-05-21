@@ -73,7 +73,11 @@ const Poster = ({
           {rating}/10
         </Rating>
       </ImageContainer>
-      <Title>{title}</Title>
+      <Title>
+        {title.length > 16
+          ? `${title.substring(0, 16)}...`
+          : title}
+      </Title>
       <Year>{year}</Year>
     </Container>
   </Link>
