@@ -42,6 +42,8 @@ npm start
 
 ## 리액트 활용
 
+### Router
+
 - Router Composition
 
 ```react
@@ -61,5 +63,65 @@ npm start
     <Redirect from="*" to="/" />
   </Switch>
 </Router>
+```
+
+### Styling
+
+1. `import "./App.css"`
+
+2. 컴포넌트를 폴더로 구분
+
+- `src/Components/Header/index.js` : Header.js 임포트
+- `src/Components/Header/Header.js` : Header.css 임포트
+- `src/Components/Header/Header.css`
+
+3. className 의 로컬화
+
+- 2번과 동일한 폴더 구조에서 `.css`확장자를 `.module.css` 로 변경
+  - 임포트할 때는 `import styles from "./Header.module.css"`  로 작성
+  - 클래스명은 `className={styles.클래스명}` 로 작성
+
+4. **styled-components**
+
+- 로컬 스타일  `npm i styled-components`
+
+```react
+import styled from "styled-components";
+
+const [이름] = styled.[태그]`
+	[스타일]
+`;
+```
+
+- 글로벌 스타일 `npm i styled-reset`
+  - `src/Components/GlobalStyles.js` 생성
+  - `App.js` 에서 임포트
+
+```javascript
+// GlobalStyles.js
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+
+const globalStyles = createGlobalStyle`
+    ${reset};
+    * {
+        box-sizing: border-box;
+    }
+`;
+
+export default globalStyles;
+```
+
+- 반응형 스타일
+
+```js
+const Item = styled.li`
+  padding: 10px 15px;
+  border-bottom: 3px solid
+    ${(props) =>
+      props.current ? "yellowgreen" : "transparent"};
+`;
+
+<Item current="true" />
 ```
 
