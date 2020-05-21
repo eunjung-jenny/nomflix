@@ -141,6 +141,8 @@ const Item = styled.li`
 
 - 컨테이너: 데이터를 불러오는 역할 (w/ api, state, logics)
 - 프리젠터: 화면에 보여주는 역할 (함수형 컴포넌트)
+- 전체 흐름
+  - index.js => App.js => Router => (component) index.js => Container.js => api => render => componentDidMount => setState => render => return Presenter.js
 
 ## 해야할 것
 
