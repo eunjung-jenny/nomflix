@@ -27,6 +27,18 @@ npx -v
 - [] Search
 - [] Detail
 
+### api
+
+- [x] Now playing (Movie)
+- [x] Upcoming (Movie)
+- [x] Top Rated (TV, Movie)
+- [x] Popular (TV, Movie)
+- [x] Airing Today (TV)
+- [x] Detail (TV, Movie)
+- [x] Search (TV, Movie)
+
+
+
 ## 앱 기본 설정
 
 - `create-react-app` : 리액트는 최신 javascript 문법을 사용, 이로 인해 `babel`, `webpack` 등을 사용하여 브라우저가 해석할 수 있게끔 downgrade 작업을 해줘야 하는 부분을 자동화해줌.
@@ -125,3 +137,6 @@ const Item = styled.li`
 <Item current="true" />
 ```
 
+## 해야할 것
+
+- 서버 만들어서 api key 숨기기 (키 변경 필요)
