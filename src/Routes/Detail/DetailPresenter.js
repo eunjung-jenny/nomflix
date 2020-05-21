@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "Components/Loader";
+import { Helmet } from "react-helmet";
+import Message from "Components/Message";
 
 const Container = styled.div`
   height: calc(100vh - 32px);
@@ -62,11 +64,32 @@ const Overview = styled.p`
   line-height: 1.5;
   width: 50%;
 `;
+
 const DetailPresenter = ({ result, error, loading }) =>
   loading ? (
-    <Loader />
+    <>
+      <Helmet>
+        <title>Loading | Nomflix</title>
+      </Helmet>
+      <Loader />
+    </>
+  ) : error ? (
+    <>
+      <Helmet>
+        <title>Not Found | Nomflix</title>
+      </Helmet>
+      <Message text="Nothing found" color="#95a5a6" />
+    </>
   ) : (
     <Container>
+      <Helmet>
+        <title>
+          {result.original_title
+            ? result.original_title
+            : result.original_name}{" "}
+          | Nomflix
+        </title>
+      </Helmet>
       <Backdrop
         bgImage={
           result
@@ -108,8 +131,8 @@ const DetailPresenter = ({ result, error, loading }) =>
                   ? genre.name
                   : `${genre.name} / `
               )}
+            <Overview>{result.overview}</Overview>
           </ItemContainer>
-          <Overview>{result.overview}</Overview>
         </Data>
       </Content>
     </Container>

@@ -1,6 +1,8 @@
 # Nomflix
 
 > 니콜라스와 함께 하는 react 시간!
+>
+> TMDB api 로부터 영화/드라마 데이터를 받아와서 보여주는 앱 (서버 없이 리액트로만 구현)
 
 ## 환경설정
 
@@ -146,6 +148,23 @@ const Item = styled.li`
 - 전체 흐름
   - index.js => App.js => Router => (component) index.js => Container.js => api => render => componentDidMount => setState => render => return Presenter.js
 
+### react helmet
+
+- `npm i react-helmet`
+
+```react
+import Helmet from "react-helmet";
+<Helmet>
+  <title>Title</title>
+</Helmet>
+```
+
+
+
+
+
 ## 해야할 것
 
 - 서버 만들어서 api key 숨기기 (키 변경 필요)
+
+- 디테일 페이지에 유투브 영상, 출연진, 제작사, 시리즈, IMDb 링크 등 관련 내용 표시
