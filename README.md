@@ -77,6 +77,8 @@ npm start
 </Router>
 ```
 
+- variable routing: `<Route path="/show/:id" component={Detail} />`
+
 ### Styling
 
 1. `import "./App.css"`
