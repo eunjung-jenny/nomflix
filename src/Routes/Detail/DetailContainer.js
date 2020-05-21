@@ -39,7 +39,6 @@ export default class extends React.Component {
           parsedId
         ));
       }
-      console.log(result);
     } catch {
       this.setState({ error: "Can't find anything." });
     } finally {
