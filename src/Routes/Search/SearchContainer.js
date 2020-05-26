@@ -49,6 +49,12 @@ export default class extends React.Component {
     }
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.searchTerm !== prevState.searchTerm) {
+      this.searchByTerm();
+    }
+  }
+
   render() {
     const {
       movieResults,

@@ -3,51 +3,77 @@ import DetailPresenter from "./DetailPresenter";
 import { moviesApi, tvApi } from "api";
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-    const {
-      location: { pathname },
-    } = props;
-    this.state = {
-      result: null,
-      error: null,
-      loading: true,
-      isMovie: pathname.includes("movie"),
-    };
-  }
+  state = {
+    id: null,
+    isMovie: null,
+    result: null,
+    error: null,
+    loading: true,
+  };
 
-  async componentDidMount() {
+  getResult = async (isMovie, id) => {
+    let result = null;
+    try {
+      if (isMovie) {
+        ({ data: result } = await moviesApi.movieDetail(
+          id
+        ));
+      } else {
+        ({ data: result } = await tvApi.tvDetail(id));
+      }
+    } catch {
+      this.setState({ error: "Can't find anything." });
+    } finally {
+      this.setState({
+        id,
+        isMovie,
+        result,
+        loading: false,
+      });
+    }
+  };
+
+  componentDidMount() {
     const {
       match: {
         params: { id },
       },
+      location: { pathname },
       history: { push },
     } = this.props;
-    const { isMovie } = this.state;
-    const parsedId = parseInt(id);
+    const parsedId = Number(id);
     if (isNaN(parsedId)) {
       return push("/");
     }
-    let result = null;
-    try {
-      console.log(isMovie);
-      if (isMovie) {
-        ({ data: result } = await moviesApi.movieDetail(
-          parsedId
-        ));
-      } else {
-        ({ data: result } = await tvApi.tvDetail(parsedId));
+    const isMovie = pathname.includes("movie");
+    this.getResult(isMovie, parsedId);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.id) {
+      const {
+        match: {
+          params: { id },
+        },
+        location: { pathname },
+        history: { push },
+      } = this.props;
+      const parsedId = Number(id);
+      if (isNaN(parsedId)) {
+        return push("/");
       }
-      // console.log(result);
-    } catch {
-      this.setState({ error: "Can't find anything." });
-    } finally {
-      this.setState({ loading: false, result });
+      const isMovie = pathname.includes("movie");
+      if (
+        this.state.id !== parsedId ||
+        this.state.isMovie !== isMovie
+      ) {
+        this.getResult(isMovie, parsedId);
+      }
     }
   }
 
   render() {
-    const { result, error, loading } = this.state;
+    const { id, result, error, loading } = this.state;
     return (
       <DetailPresenter
         result={result}
