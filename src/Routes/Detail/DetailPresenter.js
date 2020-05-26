@@ -33,10 +33,13 @@ const Content = styled.div`
 `;
 
 const Cover = styled.div`
-  width: 30%;
   background-image: url(${(props) => props.bgImage});
   background-position: center center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  width: 30%;
+  min-width: 300px;
 `;
 
 const Data = styled.div`
