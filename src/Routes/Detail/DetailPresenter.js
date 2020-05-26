@@ -100,44 +100,49 @@ const DetailPresenter = ({ result, error, loading }) =>
             : ""
         }
       />
-      <Content>
-        <Cover
-          bgImage={
-            result
-              ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-              : require("../../assets/noImage.jpg")
-          }
-        ></Cover>
-        <Data>
-          <Title>
-            {result.original_title
-              ? result.original_title
-              : result.original_name}
-          </Title>
-          <ItemContainer>
-            <Item>
-              {result.release_date
-                ? result.release_date.substring(0, 4)
-                : result.first_air_date.substring(0, 4)}
-            </Item>
-            <Divider>∙</Divider>
-            <Item>
-              {result.runtime
-                ? result.runtime
-                : result.episode_run_time[0]}{" "}
-              min
-            </Item>
-            <Divider>∙</Divider>
-            {result.genres &&
-              result.genres.map((genre, idx) =>
-                idx === result.genres.length - 1
-                  ? genre.name
-                  : `${genre.name} / `
-              )}
-            <Overview>{result.overview}</Overview>
-          </ItemContainer>
-        </Data>
-      </Content>
+      {result && (
+        <Content>
+          <Cover
+            bgImage={
+              result.poster_path
+                ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                : require("../../assets/noImage.jpg")
+            }
+          ></Cover>
+          <Data>
+            <Title>
+              {result.original_title
+                ? result.original_title
+                : result.original_name}
+            </Title>
+            <ItemContainer>
+              <Item>
+                {result.release_date
+                  ? result.release_date.substring(0, 4)
+                  : result.first_air_date
+                  ? result.first_air_date.substring(0, 4)
+                  : ""}
+              </Item>
+              <Divider>∙</Divider>
+              <Item>
+                {"runtime" in result
+                  ? `${result.runtime} min`
+                  : result.episode_run_time[0]
+                  ? `${result.episode_run_time[0]} min`
+                  : ""}
+              </Item>
+              <Divider>∙</Divider>
+              {result.genres &&
+                result.genres.map((genre, idx) =>
+                  idx === result.genres.length - 1
+                    ? genre.name
+                    : `${genre.name} / `
+                )}
+              <Overview>{result.overview}</Overview>
+            </ItemContainer>
+          </Data>
+        </Content>
+      )}
     </Container>
   );
 
